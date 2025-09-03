@@ -1,0 +1,55 @@
+services:
+  user:
+    build:
+      context: .
+      dockerfile: users/Dockerfile.users 
+    container_name: user      # added by me
+    image: user               # added by me
+    ports:
+      - "9000:5000"
+    networks:
+      - chundrua
+  products:
+    build:
+      context: .
+      dockerfile: products/Dockerfile.products
+    container_name: products  # added by me
+    image: products           # added by me
+    ports:
+      - "9001:5000"
+    networks:
+      - chundrua
+  search:
+    build:
+      context: ./search
+      dockerfile: Dockerfile.search
+    container_name: search    # added by me
+    image: search          # added by me
+    ports:
+      - "9002:5000"
+    networks:
+      - chundrua
+  orders:
+    build:
+      context: ./orders
+      dockerfile: Dockerfile.order
+    container_name: orders   # added by me
+    image: orders         # added by me
+    ports:
+      - "9003:5000"
+    networks:
+      - chundrua
+  logs:
+    build:
+      context: .
+      dockerfile: logs/Dockerfile.logs
+    container_name: logs    # added by me
+    image: logs          # added by me
+    ports:
+      - "9004:5000"
+    networks:
+      - chundrua
+
+networks:
+  chundrua:
+    driver: bridge

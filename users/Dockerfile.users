@@ -1,0 +1,13 @@
+FROM python:latest
+
+WORKDIR /app
+
+COPY users/app.py ./app.py
+COPY users/user.sql ./user.sql
+COPY key.txt ./key.txt
+
+RUN pip install flask requests
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]
